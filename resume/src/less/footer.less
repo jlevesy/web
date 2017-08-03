@@ -1,0 +1,45 @@
+footer {
+  padding: @space-vertical @space-horizontal;
+  text-align: center;
+  font-size: @small-text-size;
+  margin-bottom: 40px;
+  background-color: @darker-grey;
+  color: @white;
+
+  p {
+    margin-top: 0px;
+    margin-bottom: @space-vertical;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  a, a:visited {
+    text-decoration: none;
+    color: #fff !important;
+  }
+
+  .print {
+    cursor: pointer;
+  }
+
+  .website {
+    display: none;
+  }
+
+  @media print {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+
+    .website {
+      display: block;
+    }
+
+    .print {
+      display: none;
+    }
+  }
+}

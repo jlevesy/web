@@ -1,0 +1,48 @@
+.section {
+  padding: @space-vertical @space-horizontal;
+  border-top: @light-grey 1px solid;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  text-align: justify;
+
+  p {
+    margin-top: 0;
+    margin-bottom: @space-vertical;
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  h2 {
+    margin-top: 0px;
+    margin-bottom: @space-vertical;
+  }
+
+  &.only-printable {
+    display: none;
+  }
+
+  @media print {
+    padding: @space-vertical-print @space-horizontal;
+    margin-bottom: @space-vertical-print;
+
+    h2 {
+      margin-bottom: @space-vertical-print;
+    }
+
+    h3, p {
+      margin: 0;
+    }
+
+    &.only-printable {
+      display: block;
+    }
+
+    &.not-printable {
+      display: none;
+    }
+  }
+}

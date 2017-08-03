@@ -1,0 +1,41 @@
+header {
+  padding: @space-vertical @space-horizontal;
+  background-color: @darker-grey;
+  color: @white;
+  display: flex;
+  flex-direction: column;
+
+  .left {
+    text-align: left;
+    flex: 2 1 auto;
+    order:1;
+    p {
+      font-size: @small-text-size;
+      i {
+        margin-right: @space-horizontal/2;
+      }
+      a, a:visited {
+        text-decoration: none;
+        color: #fff !important;
+      }
+    }
+  }
+
+  .right {
+    text-align: right;
+    order:0;
+    flex: 1 1 auto;
+  }
+
+  h1, p {
+    margin: 0;
+  }
+
+  @media (min-width: @very-small-screens) {
+    flex-direction: row;
+
+    .left {
+      order: 0;
+    }
+  }
+}

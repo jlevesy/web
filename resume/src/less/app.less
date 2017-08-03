@@ -1,0 +1,55 @@
+@import 'https://fonts.googleapis.com/css?family=Lato|Scope+One';
+@import 'font-awesome';
+
+@import 'colors';
+
+@import 'mixin/left-decoration';
+
+@import 'container';
+@import 'header';
+@import 'footer';
+@import 'section';
+@import 'item';
+@import 'skill-section';
+
+@very-small-screens: 435px;
+@small-screens: 630px;
+@container-width: 768px;
+@space-vertical: 8px;
+@space-vertical-print: 5px;
+@space-horizontal: 15px;
+@small-text-size: 0.9em;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Scope One', serif;
+}
+
+body {
+  background-color: @light-grey;
+  -webkit-print-color-adjust: exact;
+  position: relative;
+  margin: 0 !important;
+}
+
+@media print {
+  p {
+    font-size: @small-text-size;
+  }
+
+  body {
+    background-color: @white !important;
+  }
+
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+}

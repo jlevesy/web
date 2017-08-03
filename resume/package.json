@@ -1,0 +1,21 @@
+{
+  "name": "cv-jlevesy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.1.0",
+    "font-awesome": "^4.6.3",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-less": "^3.0.5",
+    "gulp-notify": "^2.2.0"
+  }
+}
