@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+  traefik:
+    driver: bridge
+
+services:
+  lb:
+    image: traefik
+    ports:
+      - 8080:8080
+      - 80:80
+      - 443:443
+    command: [
+      "--docker",
+      # "--docker.domain=${DOMAIN}",
+      "--docker.watch",
+      "--web",
+      "--web.metrics.prometheus",
+      "--debug"
+    ]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik
+  home:
+    image: jlevesy/home
+    networks:
+      - traefik
+  resume:
+    image: jlevesy/resume
+    networks:
+      - traefik
+  talks:
+    image: jlevesy/talks
+    networks:
+      - traefik
