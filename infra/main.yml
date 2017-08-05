@@ -1,0 +1,14 @@
+---
+- hosts: server
+  become: yes
+  become_method: sudo
+  vars:
+    machine_hostname: 'rebox'
+    primary_public_keys:
+    sshd_port: 22
+    tcp_open_ports:
+      - 80
+      - 443
+  roles:
+    - common
+    - docker

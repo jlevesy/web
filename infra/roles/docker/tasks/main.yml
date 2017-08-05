@@ -1,0 +1,34 @@
+---
+
+- name: add docker reprository key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: add docker apt repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian jessie stable
+    state: present
+
+- name: install docker-ce
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+
+- name: enable docker service
+  systemd:
+    enabled: yes
+    daemon_reload: yes
+    name: docker
+
+- name: make sure we have a 'docker' group
+  group:
+    name: docker
+    state: present
+
+- name: add primary user to docker group
+  user:
+    name: "{{ primary_user }}"
+    group: 'docker'
+    append: true
