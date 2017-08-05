@@ -15,7 +15,7 @@ ARG SPIGOT_VERSION=1.12
 
 RUN apk add --update openjdk8-jre
 
-COPY --from=build /build/spigot-${SPIGOT_VERSION}.jar /minecraft/
+COPY --from=build /build/spigot-${SPIGOT_VERSION}.jar /minecraft/spigot.jar
 COPY config/* minecraft/
 
 ADD https://dev.bukkit.org/projects/multiverse-core/files/latest /minecraft/plugin
@@ -23,4 +23,4 @@ ADD https://dev.bukkit.org/projects/multiverse-portals/files/latest /minecraft/p
 
 WORKDIR /minecraft
 
-ENTRYPOINT ["java","-jar","spigot-${SPIGOT_VERSION}.jar", "${JAVA_OPTS}"]
+CMD ["java","-jar","spigot.jar"]

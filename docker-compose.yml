@@ -1,7 +1,7 @@
 version: '3'
 
 networks:
-  traefik:
+  web:
     driver: bridge
 
 services:
@@ -13,7 +13,6 @@ services:
       - 443:443
     command: [
       "--docker",
-      # "--docker.domain=${DOMAIN}",
       "--docker.watch",
       "--web",
       "--web.metrics.prometheus",
@@ -22,16 +21,31 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - traefik
+      - web
   home:
     image: jlevesy/home
     networks:
-      - traefik
+      - web
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=home"
+      - "traefik.frontend.rule=Host:${DOMAIN}"
+      - "traefik.docker.network=web"
   resume:
     image: jlevesy/resume
     networks:
-      - traefik
+      - web
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=home"
+      - "traefik.frontend.rule=Host:me.${DOMAIN}"
+      - "traefik.docker.network=web"
   talks:
     image: jlevesy/talks
     networks:
-      - traefik
+      - web
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=home"
+      - "traefik.frontend.rule=Host:talks.${DOMAIN}"
+      - "traefik.docker.network=web"
