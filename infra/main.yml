@@ -1,10 +1,14 @@
 ---
-- hosts: server
+- hosts: all
   become: yes
   become_method: sudo
   vars:
-    machine_hostname: 'rebox'
+    machine_hostname: "{{ lookup('env', 'MACHINE_HOSTNAME') }}"
+    root_password: "{{ lookup('env', 'MACHINE_ROOT_PASSWORD') }}"
+    primary_user: "{{ lookup('env', 'MACHINE_PRIMARY_USER') }}"
+    primary_password: "{{ lookup('env', 'MACHINE_PRIMARY_PASSWORD') }}"
     primary_public_keys:
+      - "{{ lookup('env', 'MACHINE_PRIMARY_PUBLIC_KEY') }}"
     sshd_port: 22
     tcp_open_ports:
       - 80
