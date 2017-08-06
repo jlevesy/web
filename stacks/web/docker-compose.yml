@@ -2,50 +2,34 @@ version: '3'
 
 networks:
   web:
-    driver: bridge
+    external:
+      name: "admin_web"
 
 services:
-  lb:
-    image: traefik
-    ports:
-      - 8080:8080
-      - 80:80
-      - 443:443
-    command: [
-      "--docker",
-      "--docker.watch",
-      "--web",
-      "--web.metrics.prometheus",
-      "--debug"
-    ]
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - web
   home:
-    image: jlevesy/home
+    image: ${REGISTRY}/home
     networks:
       - web
     labels:
       - "traefik.port=80"
       - "traefik.backend=home"
       - "traefik.frontend.rule=Host:${DOMAIN}"
-      - "traefik.docker.network=web"
+      - "traefik.docker.network=admin_web"
   resume:
-    image: jlevesy/resume
+    image: ${REGISTRY}/resume
     networks:
       - web
     labels:
       - "traefik.port=80"
-      - "traefik.backend=home"
+      - "traefik.backend=resume"
       - "traefik.frontend.rule=Host:me.${DOMAIN}"
-      - "traefik.docker.network=web"
+      - "traefik.docker.network=admin_web"
   talks:
-    image: jlevesy/talks
+    image: ${REGISTRY}/talks
     networks:
       - web
     labels:
       - "traefik.port=80"
-      - "traefik.backend=home"
+      - "traefik.backend=talks"
       - "traefik.frontend.rule=Host:talks.${DOMAIN}"
-      - "traefik.docker.network=web"
+      - "traefik.docker.network=admin_web"

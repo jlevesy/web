@@ -13,3 +13,4 @@ common_packages:
   - unattended-upgrades
   - apt-listchanges
   - apt-transport-https
+  - git

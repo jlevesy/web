@@ -9,6 +9,7 @@
     primary_password: "{{ lookup('env', 'MACHINE_PRIMARY_PASSWORD') }}"
     primary_public_keys:
       - "{{ lookup('env', 'MACHINE_PRIMARY_PUBLIC_KEY') }}"
+
     sshd_port: 22
     tcp_open_ports:
       - 80
