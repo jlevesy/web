@@ -11,14 +11,8 @@ services:
       - 8080:8080
       - 80:80
       - 443:443
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
     command: [
       "--docker",
-      "--docker.swarmmode",
-      "--docker.domain=${DOMAIN}",
       "--docker.watch",
       "--web",
       "--configFile=/etc/traefik/traefik.toml"

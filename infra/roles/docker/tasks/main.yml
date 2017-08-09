@@ -32,7 +32,3 @@
     enabled: yes
     daemon_reload: yes
     name: docker
-
-- name: enable docker swarmode
-  command: docker swarm init
-  ignore_errors: yes
