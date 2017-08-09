@@ -10,12 +10,18 @@
     primary_public_keys:
       - "{{ lookup('env', 'MACHINE_PRIMARY_PUBLIC_KEY') }}"
 
+    docker_ca_key_passphrase: "{{ lookup('env','DOCKER_CA_KEY_PASSPHRASE') }}"
+    domain: "{{ lookup('env', 'DOMAIN') }}"
+
+    docker_client_tls_path: "{{ lookup('env', 'DOCKER_CLIENT_TLS_PATH') }}"
+
     sshd_port: 22
     tcp_open_ports:
       - 80
       - 443
       - 8080
+      - 2376
   roles:
     - common
     - docker
-    - docker-compose
+    - docker-tls

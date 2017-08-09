@@ -28,6 +28,7 @@
     update_cache: yes
 
 - name: enable docker service
+  become: true
   systemd:
     enabled: yes
     daemon_reload: yes
