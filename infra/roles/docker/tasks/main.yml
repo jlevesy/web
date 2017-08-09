@@ -18,7 +18,7 @@
 - name: add primary user to docker group
   user:
     name: "{{ primary_user }}"
-    group: 'docker'
+    groups: 'docker'
     append: true
 
 - name: install docker-ce

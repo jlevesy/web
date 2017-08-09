@@ -39,7 +39,7 @@
   user:
     name: "{{ primary_user }}"
     password: "{{ primary_password | password_hash('sha512') }}"
-    groups: 'sudo, docker'
+    groups: 'sudo'
     shell: '/bin/bash'
 
 - name: add authorized keys for {{primary_user}}
