@@ -3,14 +3,10 @@ version: '3'
 networks:
   web:
     driver: bridge
-  monitoring:
-    driver: bridge
-  grafana_sources:
-    driver: bridge
 
 services:
   lb:
-    image: traefik
+    image: ${REGISTRY}/traefik
     ports:
       - 8080:8080
       - 80:80
@@ -25,25 +21,9 @@ services:
       "--docker.domain=${DOMAIN}",
       "--docker.watch",
       "--web",
-      "--web.metrics.prometheus",
-      "--debug"
+      "--configFile=/etc/traefik/traefik.toml"
     ]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - web
-      - monitoring
-
-  grafana:
-    image: grafana/grafana
-    deploy:
-      replicas: 1
-      labels:
-        - "traefik.port=3000"
-        - "traefik.backend=grafana"
-        - "traefik.backend.loadbalancer.sticky=true"
-        - "traefik.frontend.rule=Host:grafana.${DOMAIN}"
-        - "traefik.docker.network=admin_web"
-    networks:
-      - web
-      - grafana_sources

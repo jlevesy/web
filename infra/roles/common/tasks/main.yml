@@ -7,7 +7,7 @@
 
 - name: upgrade the system
   apt:
-    upgrade: safe
+    upgrade: dist
 
 - name: install common packages
   apt:
@@ -35,23 +35,11 @@
     name: root
     password: "{{ root_password | password_hash('sha512') }}"
 
-- name: make sure we have a 'wheel' group
-  group:
-    name: wheel
-    state: present
-
-- name: allow 'wheel' group  to have passwordless sudo
-  lineinfile:
-    dest: /etc/sudoers
-    regexp: '^%wheel'
-    line: '%wheel ALL=(ALL) ALL'
-    state: present
-
 - name: add primary user
   user:
     name: "{{ primary_user }}"
     password: "{{ primary_password | password_hash('sha512') }}"
-    group: 'wheel'
+    groups: 'sudo, docker'
     shell: '/bin/bash'
 
 - name: add authorized keys for {{primary_user}}
