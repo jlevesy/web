@@ -53,6 +53,7 @@
     path: /etc/ssl/csr/docker-server.csr
     privatekey_path: "{{ server_key.filename }}"
     commonName: "{{ domain }}"
+    subjectAltName: "DNS:{{ domain }}"
   register: server_csr
 
 - name: self signing server public key
@@ -113,7 +114,7 @@
     content: |
       [Service]
       ExecStart=
-      ExecStart=/usr/bin/dockerd --tlsverify --tlscacert=/etc/ssl/ca/docker-ca.pem --tlscert=/etc/ssl/certs/docker-server-cert.pem --tlskey={{ server_key.filename }} -H=0.0.0.0:2376
+      ExecStart=/usr/bin/dockerd --tlsverify --tlscacert=/etc/ssl/ca/docker-ca.pem --tlscert=/etc/ssl/certs/docker-server-cert.pem --tlskey={{ server_key.filename }} -H=0.0.0.0:2376 -H unix://
   notify:
     - reload systemd
     - restart docker
