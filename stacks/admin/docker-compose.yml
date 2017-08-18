@@ -5,6 +5,8 @@ networks:
     driver: bridge
   grafana_sources:
     driver: bridge
+  monitoring:
+    driver: bridge
 
 services:
   lb:
@@ -23,6 +25,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - web
+      - monitoring
 
   grafana:
     image: grafana/grafana

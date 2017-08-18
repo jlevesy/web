@@ -52,6 +52,31 @@ push_admin:
 build_admin:
 	@cd stacks/admin && docker-compose build
 
+.PHONY: log_monitoring
+log_monitoring:
+	@cd stacks/monitoring && docker-compose ${DOCKER_REMOTE_OPTS} logs
+
+.PHONY: logf_monitoring
+logf_monitoring:
+	@cd stacks/monitoring && docker-compose ${DOCKER_REMOTE_OPTS} logs -f
+
+.PHONY: deliver_monitoring
+deliver_monitoring: build_monitoring push_monitoring deploy_monitoring
+
+.PHONY: deploy_monitoring
+deploy_monitoring:
+	@cd stacks/monitoring && \
+		docker-compose ${DOCKER_REMOTE_OPTS} pull --parallel && \
+       		docker-compose ${DOCKER_REMOTE_OPTS} up -d --force-recreate --no-build
+
+.PHONY: push_monitoring
+push_monitoring:
+	@cd stacks/monitoring && docker-compose push
+
+.PHONY: build_monitoring
+build_monitoring:
+	@cd stacks/monitoring && docker-compose build
+
 .PHONY: remote_status
 remote_status:
 	@docker ${DOCKER_REMOTE_OPTS} ps
