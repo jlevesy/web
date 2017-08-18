@@ -114,7 +114,7 @@
     content: |
       [Service]
       ExecStart=
-      ExecStart=/usr/bin/dockerd --tlsverify --tlscacert=/etc/ssl/ca/docker-ca.pem --tlscert=/etc/ssl/certs/docker-server-cert.pem --tlskey={{ server_key.filename }} -H=0.0.0.0:2376 -H unix://
+      ExecStart=/usr/bin/dockerd --tlsverify --tlscacert=/etc/ssl/ca/docker-ca.pem --tlscert=/etc/ssl/certs/docker-server-cert.pem --tlskey={{ server_key.filename }} -H=0.0.0.0:2376 -H unix:// --live-restore
   notify:
     - reload systemd
     - restart docker
