@@ -16,10 +16,10 @@ services:
     image: ${REGISTRY}/prometheus
     command: [
       '-config.file=/etc/prometheus/prometheus.yml',
-      '-storage.local.path=/data/prometheus_monitoring',
+      '-storage.local.path=/data',
     ]
     volumes:
-      - /data:/data/prometheus
+      - /data/prometheus:/data
     networks:
       - web
       - monitoring

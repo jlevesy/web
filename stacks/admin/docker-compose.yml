@@ -12,8 +12,8 @@ services:
   lb:
     image: ${REGISTRY}/traefik
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     command: [
       "--docker",
       "--docker.watch",

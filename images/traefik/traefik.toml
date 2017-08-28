@@ -17,4 +17,4 @@ entryPoint = "https"
 
 [[acme.domains]]
    main = "julienlevesy.net"
-   sans = ["me.julienlevesy.net", "talks.julienlevesy.net", "metrics.julienlevesy.net"]
+   sans = ["me.julienlevesy.net", "talks.julienlevesy.net", "metrics.julienlevesy.net", "git.julienlevesy.net"]

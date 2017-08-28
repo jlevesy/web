@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  web:
+    external:
+      name: "admin_web"
+
+services:
+  gogs:
+    image: gogs/gogs
+    volumes:
+      - /data/gogs:/data
+    networks:
+      - web
+    labels:
+      - "traefik.port=3000"
+      - "traefik.backend=git"
+      - "traefik.frontend.rule=Host:git.${DOMAIN}"
+    ports:
+      - "10022:22"

@@ -4,7 +4,28 @@ DOCKER_REMOTE_OPTS=--tlsverify \
 		   --tlskey=${DOCKER_CLIENT_TLS_PATH}/key.pem \
 		   --host="${DOMAIN}:2376"
 
-all: print_env deliver_admin deliver_web
+all: print_env deliver_admin deliver_web deliver_monitoring deliver_apps
+
+.PHONY: log_apps
+log_apps:
+	@cd stacks/apps && docker-compose ${DOCKER_REMOTE_OPTS} logs -f
+
+.PHONY: deliver_apps
+deliver_apps: build_apps push_apps deploy_apps
+
+.PHONY: deploy_apps
+deploy_apps:
+	@cd stacks/apps && \
+		docker-compose ${DOCKER_REMOTE_OPTS} pull --parallel && \
+       		docker-compose ${DOCKER_REMOTE_OPTS} up -d --force-recreate --no-build
+
+.PHONY: push_apps
+push_apps:
+	@cd stacks/apps && docker-compose push
+
+.PHONY: build_apps
+build_apps:
+	@cd stacks/apps && docker-compose build
 
 .PHONY: log_web
 log_web:

@@ -20,7 +20,14 @@
       - 80
       - 443
       - 2376
+      - 10022
+
+    docker_volumes:
+      - /data/prometheus
+      - /data/gogs
+
   roles:
     - common
     - docker
     - docker-tls
+    - docker-volumes
