@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+  web:
+    driver: bridge
+
+services:
+  lb:
+    image: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    command: [
+      "--configFile=/etc/traefik/traefik.toml"
+    ]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/traefik.toml:/etc/traefik/traefik.toml
+      - ${PWD}/acme.json:/etc/traefik/acme.json
+    networks:
+      - web
+  home:
+    build:
+      context: images/home
+    networks:
+      - web
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=home"
+      - "traefik.frontend.rule=Host:julienlevesy.net"
+  resume:
+    build:
+      context: images/resume
+    networks:
+      - web
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=resume"
+      - "traefik.frontend.rule=Host:me.julienlevesy.net"
+  talks:
+    build:
+      context: images/talks
+    networks:
+      - web
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=talks"
+      - "traefik.frontend.rule=Host:talks.julienlevesy.net"

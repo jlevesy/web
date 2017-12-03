@@ -1,4 +1,5 @@
 defaultEntryPoints = ["http", "https"]
+debug = true
 
 [entryPoints]
   [entryPoints.http]
@@ -12,9 +13,15 @@ defaultEntryPoints = ["http", "https"]
 [acme]
 
 email = "jlevesy@gmail.com"
-storage = "acme.json"
+storage = "/etc/traefik/acme.json"
 entryPoint = "https"
 
 [[acme.domains]]
    main = "julienlevesy.net"
-   sans = ["me.julienlevesy.net", "talks.julienlevesy.net", "metrics.julienlevesy.net", "git.julienlevesy.net"]
+sans = ["me.julienlevesy.net", "talks.julienlevesy.net", "metrics.julienlevesy.net", "git.julienlevesy.net"]
+
+[web]
+address: ":8080"
+
+[docker]
+watch = true

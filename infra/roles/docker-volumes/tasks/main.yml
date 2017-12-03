@@ -1,7 +1,0 @@
----
-
-- name: create required volumes directories
-  file:
-    state: directory
-    path: "{{ item }}"
-  with_items: "{{ docker_volumes }}"
