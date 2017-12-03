@@ -11,7 +11,7 @@ RUN mkdir -p ${TRAEFIK_PATH} && \
   go generate && \
   go build ./cmd/traefik
 
-FROM scratch AS RUN
+FROM arm32v7/debian:stretch-slim  AS RUN
 
 COPY --from=build /go/src/github.com/containous/traefik/traefik /traefik
 COPY --from=build /go/src/github.com/containous/traefik/script/ca-certificates.crt /etc/ssl/certs
