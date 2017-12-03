@@ -38,12 +38,12 @@ services:
       - "traefik.port=80"
       - "traefik.backend=resume"
       - "traefik.frontend.rule=Host:me.julienlevesy.net"
-  talks:
-    build:
-      context: images/talks
-    networks:
-      - web
-    labels:
-      - "traefik.port=80"
-      - "traefik.backend=talks"
-      - "traefik.frontend.rule=Host:talks.julienlevesy.net"
+  # talks:
+  #   build:
+  #     context: images/talks
+  #   networks:
+  #     - web
+  #   labels:
+  #     - "traefik.port=80"
+  #     - "traefik.backend=talks"
+  #     - "traefik.frontend.rule=Host:talks.julienlevesy.net"

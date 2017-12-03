@@ -18,10 +18,7 @@ entryPoint = "https"
 
 [[acme.domains]]
    main = "julienlevesy.net"
-sans = ["me.julienlevesy.net", "talks.julienlevesy.net", "metrics.julienlevesy.net", "git.julienlevesy.net"]
-
-[web]
-address: ":8080"
+   sans = ["me.julienlevesy.net"]
 
 [docker]
 watch = true
