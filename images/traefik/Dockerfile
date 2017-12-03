@@ -15,7 +15,7 @@ FROM arm32v7/debian:stretch-slim AS RUN
 
 COPY --from=build /go/src/github.com/containous/traefik/traefik /traefik
 
-RUN apt-get install ca-certificates
+RUN apt-get update && apt-get install -y ca-certificates
 
 EXPOSE 80
 ENTRYPOINT ["/traefik"]
