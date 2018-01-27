@@ -3,6 +3,11 @@ version: '3'
 networks:
   web:
     driver: bridge
+  back:
+    driver: bridge
+
+volumes:
+  db:
 
 services:
   lb:
@@ -19,6 +24,7 @@ services:
     networks:
       - web
   home:
+    restart: always
     build:
       context: images/home
     networks:
@@ -28,6 +34,7 @@ services:
       - "traefik.backend=home"
       - "traefik.frontend.rule=Host:julienlevesy.net"
   resume:
+    restart: always
     build:
       context: images/resume
     networks:
@@ -36,6 +43,37 @@ services:
       - "traefik.port=80"
       - "traefik.backend=resume"
       - "traefik.frontend.rule=Host:me.julienlevesy.net"
+
+  readstack:
+    image: readstack
+    restart: always
+    networks:
+      - web
+      - back
+    environment:
+      - READSTACK_POSTGRES_URL=postgres://${DBUSER}:${DBPASSWORD}@db:5432/readstack?sslmode=disable
+      - READSTACK_LISTEN_PORT=80
+      - READSTACK_HANDLER_TIMEOUT=200ms
+      - READSTACK_WEB_ASSETS_PATH=dist/web
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=stack"
+      - "traefik.frontend.rule=Host:stack.julienlevesy.net"
+
+  db:
+    image: rotschopf/rpi-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=${DBUSER}
+      - POSTGRES_PASSWORD=${DBPASSWORD}
+      - POSTGRES_DB=readstack
+    volumes:
+        - db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - back
+
   # talks:
   #   build:
   #     context: images/talks
