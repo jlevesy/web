@@ -10,6 +10,9 @@ debug = true
   address = ":443"
     [entryPoints.https.tls]
 
+[web]
+address = ":8080"
+
 [acme]
 email = "jlevesy@gmail.com"
 storage = "/etc/traefik/acme.json"
