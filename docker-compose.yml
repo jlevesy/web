@@ -7,7 +7,8 @@ networks:
     driver: bridge
 
 volumes:
-  db:
+  db: ~
+  tls: ~
 
 services:
   lb:
@@ -22,6 +23,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PWD}/traefik.toml:/etc/traefik/traefik.toml
+      - tls:/etc/traefik
     networks:
       - web
   home:
