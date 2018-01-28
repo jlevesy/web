@@ -11,10 +11,12 @@ debug = true
     [entryPoints.https.tls]
 
 [acme]
-
 email = "jlevesy@gmail.com"
 storage = "/etc/traefik/acme.json"
 entryPoint = "https"
+
+[acme.httpChallenge]
+  entryPoint = "http"
 
 [[acme.domains]]
    main = "julienlevesy.net"
