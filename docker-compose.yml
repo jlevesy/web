@@ -27,6 +27,8 @@ services:
       - tls:/etc/traefik
     networks:
       - web
+    labels:
+      - "traefik.enable=false"
   home:
     restart: always
     build:
