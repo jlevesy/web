@@ -13,8 +13,6 @@
       <div class="slides">
         <section>
           <h1>Introduction to <span class="small-title">(frontend) </span>programing</h1>
-          <h3>Upfluence (HACK)ademy 2016/09/30</h3>
-          <h5>by Alexandre Papin & Julien Levesy</h5>
           <p class="small-text">
             Spoiler: Hackerman gifs included !
           </p>
@@ -75,7 +73,6 @@
           </section>
           <section>
             <h2>Variables ? Values ? Functions ? duuuh !</h2>
-            <p> &lt;insert funny gif here&gt; </p>
           </section>
           <section>
             <h2>Values</h2>
@@ -94,11 +91,11 @@
           <section>
             <h2>Variables</h2>
             <p>
-              <span class="fragment">It's like value...</span>
-              <span class="fragment">but they can change !</span>
+              <span class="fragment">They value containers !</span>
+              <span class="fragment">They can change !</span>
             </p>
             <p class="fragment">
-              they have a name
+              They have a name
             </p>
             <p class="fragment">
               And they <strong>must</strong> be declared before beeing used
@@ -185,8 +182,8 @@
           <section>
             <h2>Tools available (1/2)</h2>
             <pre><code class="fragment javascript">
-              // returns current guess by Player 2
-              var valueToGuess = getPlayerGuess();
+              // returns value input by Player 1
+              var valueToGuess = getValueToGuess();
             </code></pre>
             <pre><code class="fragment javascript">
               // Will print to the screen "PHILIPPE"
@@ -261,13 +258,12 @@
           <section>
             <h2>Tools available (2/2)</h2>
             <pre><code class="fragment javascript">
-              // returns value input by Player 1
+              // returns value to guess
               var valueToGuess = getValueToGuess();
-            </code></pre>
-            <pre><code class="fragment javascript">
-              var valueToGuess = getPlayerGuess();
-              var hint = "PHILIPPE !";
-              giveHint(hint);
+              // returns current guess by Player 2
+              var playerGuess = getPlayerGuess();
+              // Give an hint.
+              giveHint("Too low, joe");
             </code></pre>
           </section>
         </section>
